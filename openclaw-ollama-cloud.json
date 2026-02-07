@@ -127,7 +127,6 @@
         ]
       },
       "models": {
-        "anthropic/claude-sonnet-4-5": { "alias": "sonnet" },
         "ollama/kimi-k2.5:cloud": { "alias": "kimi" },
         "ollama/deepseek-v3.2:cloud": { "alias": "deepseek" },
         "ollama/deepseek-v3.1:671b-cloud": { "alias": "deepseek-r" },
