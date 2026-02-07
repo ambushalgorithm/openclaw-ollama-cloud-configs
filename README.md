@@ -107,8 +107,8 @@ systemctl --user daemon-reload && \
 systemctl --user enable --now openclaw-gateway.service && \
 openclaw status
 
-# Restart OpenClaw
-openclaw gateway restart
+# Start the OpenClaw onboarding to configure everything else.
+openclaw onboard
 ```
 
 ## Included Models
