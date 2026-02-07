@@ -1,0 +1,23 @@
+# Backups
+*.bak
+*.backup
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local test configs (don't commit actual openclaw.json)
+openclaw.json
