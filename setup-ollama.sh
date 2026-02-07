@@ -99,8 +99,8 @@ check_models() {
     done <<< "$models"
 
     echo
-    log_info "Note: Cloud models are accessed via Ollama's cloud relay."
-    log_info "You don't need to 'pull' them like local models."
+    log_info "Note: Run './setup-ollama.sh pull' to pull all cloud models."
+    log_info "Cloud models use 'ollama pull <model>:cloud' to register with the relay."
 }
 
 pull_models() {
