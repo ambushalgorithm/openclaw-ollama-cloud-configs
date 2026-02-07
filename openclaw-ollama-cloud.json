@@ -70,15 +70,6 @@
             "maxTokens": 4096
           },
           {
-            "id": "gemini-3-pro-preview:cloud",
-            "name": "gemini-3-pro-preview:cloud",
-            "reasoning": false,
-            "input": ["text", "image"],
-            "cost": { "input": 0.00125, "output": 0.005, "cacheRead": 0, "cacheWrite": 0 },
-            "contextWindow": 1050000,
-            "maxTokens": 65536
-          },
-          {
             "id": "gemini-3-flash-preview:cloud",
             "name": "gemini-3-flash-preview:cloud",
             "reasoning": false,
