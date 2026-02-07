@@ -104,8 +104,6 @@ The `openclaw-ollama-cloud.json` contains only the model-related sections:
 - **agents.defaults.model.fallbacks** — Fallback chain (10 models)
 - **agents.defaults.models** — Aliases for shorthand access
 
-No auth tokens, no Discord config, no gateway secrets. Safe to commit/public.
-
 ## Merging Behavior
 
 The merge script updates these paths in your `~/.openclaw/openclaw.json`:
