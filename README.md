@@ -6,8 +6,8 @@ Sanitized Ollama cloud model configurations for OpenClaw. Merge these into your 
 
 ```bash
 # Clone and enter the repo
-git clone <repo-url> ~/Projects/openclaw-ollama-cloud-configs
-cd ~/Projects/openclaw-ollama-cloud-configs
+git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
+cd openclaw-ollama-cloud-configs
 
 # Check current status
 ./setup-ollama.sh status
