@@ -35,7 +35,19 @@ openclaw gateway restart
 
 <img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
 
-### This will give you a clean .openclaw/openclaw.json config file.
+```bash
+# Clone Openclaw
+git clone git@github.com:openclaw/openclaw.git
+
+# install openclaw npm, etc
+
+```
+
+##### This will give you a clean .openclaw/openclaw.json config file.
+```bash
+# Run config to create the default openclaw.json file
+openclaw configure --section workspace
+```
 
 ```json
 {
@@ -71,14 +83,6 @@ openclaw gateway restart
 ```
 
 ```bash
-# Clone Openclaw
-git clone git@github.com:openclaw/openclaw.git
-
-# install openclaw npm, etc
-
-# Run config to create the default openclaw.json file
-openclaw configure --section workspace
-
 # Clone and enter the repo
 git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
 cd openclaw-ollama-cloud-configs
