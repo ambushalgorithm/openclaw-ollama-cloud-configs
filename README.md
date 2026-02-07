@@ -5,6 +5,14 @@ Sanitized Ollama cloud model configurations for OpenClaw. Merge these into your 
 ## Quick Start
 
 ```bash
+# Clone Openclaw
+git clone git@github.com:openclaw/openclaw.git
+
+# Run config to create the default openclaw.json file
+openclaw configure --section workspace
+
+<img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
+
 # Clone and enter the repo
 git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
 cd openclaw-ollama-cloud-configs
@@ -20,6 +28,47 @@ cd openclaw-ollama-cloud-configs
 
 # Merge config into your openclaw.json
 ./merge-config.py --backup
+
+# Restart OpenClaw
+openclaw gateway restart
+```
+
+## Fresh Start
+
+```bash
+# Clone Openclaw
+git clone git@github.com:openclaw/openclaw.git
+
+# install openclaw npm, etc
+
+# Run config to create the default openclaw.json file
+openclaw configure --section workspace
+
+<img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
+
+# Clone and enter the repo
+git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
+cd openclaw-ollama-cloud-configs
+
+# Check current status
+./setup-ollama.sh status
+
+# Pull all cloud models (11 models via ollama pull)
+./setup-ollama.sh pull
+
+# Preview changes
+./merge-config.py --dry-run
+
+# Merge config into your openclaw.json
+./merge-config.py --backup
+
+# Build the development version if you're working on things
+pnpm install && pnpm build && \
+cd ui && pnpm install && pnpm build && \
+cd .. && openclaw gateway uninstall && openclaw gateway install && \
+systemctl --user daemon-reload && \
+systemctl --user enable --now openclaw-gateway.service && \
+openclaw status
 
 # Restart OpenClaw
 openclaw gateway restart
