@@ -35,6 +35,41 @@ openclaw gateway restart
 
 <img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
 
+### This will give you a clean .openclaw/openclaw.json config file.
+
+```json
+{
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "agents": {
+    "defaults": {
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "workspace": "/home/clawdbot/.openclaw/workspace"
+    }
+  },
+  "gateway": {
+    "mode": "local"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-07T21:03:30.241Z",
+    "lastRunVersion": "2026.2.4",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.2.4",
+    "lastTouchedAt": "2026-02-07T21:03:30.254Z"
+  }
+}
+```
+
 ```bash
 # Clone Openclaw
 git clone git@github.com:openclaw/openclaw.git
