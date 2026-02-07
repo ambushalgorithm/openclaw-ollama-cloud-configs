@@ -44,8 +44,6 @@ git clone git@github.com:openclaw/openclaw.git
 # Run config to create the default openclaw.json file
 openclaw configure --section workspace
 
-<img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
-
 # Clone and enter the repo
 git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
 cd openclaw-ollama-cloud-configs
