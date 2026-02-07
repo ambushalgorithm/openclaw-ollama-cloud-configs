@@ -122,7 +122,6 @@ openclaw onboard
 | `minimax-m2.1:cloud` | `minimax-xl` | text | 256K | $0.0003/$0.0012 |
 | `qwen3-coder-next:cloud` | `qwen-coder` | text | 128K | $0.0005/$0.0012 |
 | `devstral-2:123b-cloud` | `devstral` | text | 128K | $0.0008/$0.0025 |
-| `gemini-3-pro-preview:cloud` | `gemini-pro` | text+image | 1M | $0.00125/$0.005 |
 | `gemini-3-flash-preview:cloud` | `gemini-flash` | text+image | 1M | $0.00015/$0.0006 |
 | `ministral-3:14b-cloud` | `ministral` | text+image | 128K | $0.0001/$0.0003 |
 | `rnj-1:8b-cloud` | `rnj` | text | 128K | $0.0004/$0.0012 |
