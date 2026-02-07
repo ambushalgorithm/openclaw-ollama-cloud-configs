@@ -15,6 +15,9 @@ cd openclaw-ollama-cloud-configs
 # Pull all cloud models (11 models via ollama pull)
 ./setup-ollama.sh pull
 
+# Preview changes
+./merge-config.py --dry-run
+
 # Merge config into your openclaw.json
 ./merge-config.py --backup
 
