@@ -6,11 +6,14 @@ Sanitized Ollama cloud model configurations for OpenClaw. Merge these into your 
 
 ```bash
 # Clone and enter the repo
-git clone <repo-url> ~/Projects/ollama-cloud-configs
-cd ~/Projects/ollama-cloud-configs
+git clone <repo-url> ~/Projects/openclaw-ollama-cloud-configs
+cd ~/Projects/openclaw-ollama-cloud-configs
 
 # Check current status
 ./setup-ollama.sh status
+
+# Pull all cloud models (11 models via ollama pull)
+./setup-ollama.sh pull
 
 # Merge config into your openclaw.json
 ./merge-config.py --backup
@@ -68,11 +71,12 @@ Merge the Ollama config into your OpenClaw configuration.
 ```
 
 ### `setup-ollama.sh`
-Check Ollama installation and cloud connectivity.
+Check Ollama installation, pull models, and verify cloud connectivity.
 
 ```bash
 ./setup-ollama.sh status      # Full status (default)
 ./setup-ollama.sh check       # Quick check
+./setup-ollama.sh pull        # Pull all 11 cloud models
 ./setup-ollama.sh aliases     # List aliases
 ./setup-ollama.sh test        # Test connectivity
 ./setup-ollama.sh test kimi   # Test specific model
@@ -124,7 +128,24 @@ Your existing auth, channels, gateway, and other settings are untouched.
    ollama serve
    ```
 
-3. **Cloud access configured**
+3. **Pull cloud models**
+   ```bash
+   ./setup-ollama.sh pull
+   # Or individually:
+   ollama pull kimi-k2.5:cloud
+   ollama pull deepseek-v3.2:cloud
+   ollama pull deepseek-v3.1:671b-cloud
+   ollama pull minimax-m2:cloud
+   ollama pull minimax-m2.1:cloud
+   ollama pull qwen3-coder-next:cloud
+   ollama pull devstral-2:123b-cloud
+   ollama pull gemini-3-pro-preview:cloud
+   ollama pull gemini-3-flash-preview:cloud
+   ollama pull ministral-3:14b-cloud
+   ollama pull rnj-1:8b-cloud
+   ```
+
+4. **Cloud access configured**
    - Ollama Cloud relay should be active (local 127.0.0.1:11434 proxies to cloud)
 
 ## Troubleshooting

@@ -103,6 +103,58 @@ check_models() {
     log_info "You don't need to 'pull' them like local models."
 }
 
+pull_models() {
+    log_info "Pulling all cloud models from config..."
+
+    if ! check_ollama_installed; then
+        return 1
+    fi
+
+    if ! check_ollama_running; then
+        return 1
+    fi
+
+    local models
+    models=$(get_cloud_models)
+
+    if [[ -z "$models" ]]; then
+        log_warn "No models found in config"
+        return 1
+    fi
+
+    echo
+    log_info "This will pull the following models via Ollama cloud relay:"
+    while IFS= read -r model; do
+        [[ -z "$model" ]] && continue
+        echo "   • $model"
+    done <<< "$models"
+    echo
+
+    local pulled=0
+    local failed=0
+
+    while IFS= read -r model; do
+        [[ -z "$model" ]] && continue
+        echo
+        log_info "Pulling: $model"
+        if ollama pull "$model" 2>&1; then
+            log_success "Pulled: $model"
+            ((pulled++))
+        else
+            log_error "Failed to pull: $model"
+            ((failed++))
+        fi
+    done <<< "$models"
+
+    echo
+    log_success "Pull complete: $pulled succeeded, $failed failed"
+
+    if [[ $failed -gt 0 ]]; then
+        log_warn "Some models failed to pull. Check your Ollama Cloud access."
+        return 1
+    fi
+}
+
 list_aliases() {
     log_info "Model aliases defined in config:"
 
@@ -214,6 +266,9 @@ case "${1:-status}" in
     setup|--setup)
         setup_all
         ;;
+    pull|--pull)
+        pull_models
+        ;;
     aliases|--aliases)
         list_aliases
         ;;
@@ -227,12 +282,18 @@ case "${1:-status}" in
         echo "  check    - Check if Ollama is installed and running"
         echo "  status   - Full status report (default)"
         echo "  setup    - Run full setup check"
+        echo "  pull     - Pull all models defined in config via ollama pull"
         echo "  aliases  - List model aliases"
         echo "  test     - Test cloud connectivity (optionally: test <model>)"
         echo "  help     - Show this help"
         echo ""
         echo "Environment variables:"
         echo "  OLLAMA_HOST  - Ollama host:port (default: 127.0.0.1:11434)"
+        echo "  CONFIG_FILE  - Path to config file (default: ./openclaw-ollama-cloud.json)"
+        echo ""
+        echo "Examples:"
+        echo "  $0 pull                    # Pull all cloud models"
+        echo "  $0 pull 2>&1 | tee pull.log # Pull with logging"
         ;;
     *)
         log_error "Unknown command: $1"
