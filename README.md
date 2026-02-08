@@ -48,21 +48,45 @@ openclaw agent --model @kimi "Hello!"
 
 Done! You can now use `@kimi`, `@deepseek`, `@gemini-pro`, etc.
 
+## Fresh Start (Full Setup)
+
+If you're setting up OpenClaw from scratch:
+
+```bash
+# 1. Clone and install OpenClaw
+git clone git@github.com:openclaw/openclaw.git
+cd openclaw && pnpm install && pnpm build
+
+# 2. Create base config
+openclaw configure --section workspace
+
+# 3. Clone this repo (in another terminal)
+cd ~ && git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
+
+# 4. Pull models and merge config
+cd openclaw-ollama-cloud-configs
+./setup-ollama.sh pull
+./merge-config.py --backup
+
+# 5. Run the onboarding wizard to configure channels, auth, etc.
+openclaw onboard
+```
+
 ## Included Models
 
-| Alias | Model | Inputs | Context | Cost (in/out) |
-|-------|-------|--------|---------|---------------|
-| `kimi` | `kimi-k2.5:cloud` | text+image | 262K | $0.50/$2.80 per M |
-| `deepseek` | `deepseek-v3.2:cloud` | text | 128K | $0.28/$0.42 per M |
-| `deepseek-r` | `deepseek-v3.1:671b-cloud` | text | 128K | $0.60/$1.70 per M |
-| `minimax` | `minimax-m2:cloud` | text | 128K | $0.30/$1.20 per M |
-| `minimax-xl` | `minimax-m2.1:cloud` | text | 256K | $0.30/$1.20 per M |
-| `qwen-coder` | `qwen3-coder-next:cloud` | text | 128K | $0.50/$1.20 per M |
-| `devstral` | `devstral-2:123b-cloud` | text | 128K | $0.80/$2.50 per M |
-| `gemini-pro` | `gemini-3-pro-preview:cloud` | text+image | 1M | $1.25/$5.00 per M |
-| `gemini-flash` | `gemini-3-flash-preview:cloud` | text+image | 1M | $0.15/$0.60 per M |
-| `ministral` | `ministral-3:14b-cloud` | text+image | 128K | $0.10/$0.30 per M |
-| `rnj` | `rnj-1:8b-cloud` | text | 128K | $0.40/$1.20 per M |
+| Alias | Model | Inputs | Context | Cost (input/output) |
+|-------|-------|--------|---------|---------------------|
+| `kimi` | `kimi-k2.5:cloud` | text+image | 262K | $0.0005 / $0.0028 |
+| `deepseek` | `deepseek-v3.2:cloud` | text | 128K | $0.00028 / $0.00042 |
+| `deepseek-r` | `deepseek-v3.1:671b-cloud` | text | 128K | $0.0006 / $0.0017 |
+| `minimax` | `minimax-m2:cloud` | text | 128K | $0.0003 / $0.0012 |
+| `minimax-xl` | `minimax-m2.1:cloud` | text | 256K | $0.0003 / $0.0012 |
+| `qwen-coder` | `qwen3-coder-next:cloud` | text | 128K | $0.0005 / $0.0012 |
+| `devstral` | `devstral-2:123b-cloud` | text | 128K | $0.0008 / $0.0025 |
+| `gemini-pro` | `gemini-3-pro-preview:cloud` | text+image | 1M | $0.00125 / $0.005 |
+| `gemini-flash` | `gemini-3-flash-preview:cloud` | text+image | 1M | $0.00015 / $0.0006 |
+| `ministral` | `ministral-3:14b-cloud` | text+image | 128K | $0.0001 / $0.0003 |
+| `rnj` | `rnj-1:8b-cloud` | text | 128K | $0.0004 / $0.0012 |
 
 **Default:** `kimi` (best balance of capability, speed, and vision support)
 
