@@ -1,262 +1,209 @@
-# Ollama Cloud Configs for OpenClaw
+# ☁️ OpenClaw Ollama Cloud Configs
 
-Sanitized Ollama cloud model configurations for OpenClaw. Merge these into your `openclaw.json` to get 11 cloud-hosted models with aliases and fallback chains.
+Pre-configured cloud-hosted Ollama models for OpenClaw — 11 models with aliases, fallback chains, and automatic setup.
 
-## Quick Start
+<img width="755" height="598" alt="OpenClaw Config" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
+
+## What You Get
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  kimi        → Kimi K2.5 (vision, 262K context)         │
+│  deepseek    → DeepSeek V3.2 (fast general)             │
+│  deepseek-r  → DeepSeek R1 671B (reasoning)             │
+│  qwen-coder  → Qwen 3 Coder (code specialist)           │
+│  gemini-pro  → Gemini 3 Pro (vision, 1M context)        │
+│  gemini-flash→ Gemini 3 Flash (fast vision)             │
+│  + 5 more...                                            │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Features:**
+- ✅ 11 cloud-hosted models via Ollama
+- ✅ Short aliases (`@kimi`, `@deepseek`, `@qwen-coder`)
+- ✅ Automatic fallback chain (if one fails, try the next)
+- ✅ One-command setup
+
+## Quick Start (2 minutes)
+
+**Prerequisites:** OpenClaw installed, Ollama Cloud relay active
 
 ```bash
-# Clone Openclaw
-git clone git@github.com:openclaw/openclaw.git
-
-# Run config to create the default openclaw.json file
-openclaw configure --section workspace
-
-# Clone and enter the repo
+# Clone this repo
 git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
 cd openclaw-ollama-cloud-configs
 
-# Check current status
-./setup-ollama.sh status
-
-# Pull all cloud models (11 models via ollama pull)
+# Check status and pull models
 ./setup-ollama.sh pull
 
-# Preview changes
-./merge-config.py --dry-run
-
-# Merge config into your openclaw.json
+# Merge config into your OpenClaw
 ./merge-config.py --backup
 
 # Restart OpenClaw
 openclaw gateway restart
+
+# Test it
+openclaw agent --model @kimi "Hello!"
 ```
 
-## Fresh Start
-
-<img width="755" height="598" alt="image" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
-
-```bash
-# Clone Openclaw
-git clone git@github.com:openclaw/openclaw.git
-
-# install openclaw npm, etc
-
-```
-
-##### This will give you a clean .openclaw/openclaw.json config file.
-```bash
-# Run config to create the default openclaw.json file
-openclaw configure --section workspace
-```
-
-```json
-{
-  "messages": {
-    "ackReactionScope": "group-mentions"
-  },
-  "agents": {
-    "defaults": {
-      "maxConcurrent": 4,
-      "subagents": {
-        "maxConcurrent": 8
-      },
-      "compaction": {
-        "mode": "safeguard"
-      },
-      "workspace": "/home/clawdbot/.openclaw/workspace"
-    }
-  },
-  "gateway": {
-    "mode": "local"
-  },
-  "wizard": {
-    "lastRunAt": "2026-02-07T21:03:30.241Z",
-    "lastRunVersion": "2026.2.4",
-    "lastRunCommand": "configure",
-    "lastRunMode": "local"
-  },
-  "meta": {
-    "lastTouchedVersion": "2026.2.4",
-    "lastTouchedAt": "2026-02-07T21:03:30.254Z"
-  }
-}
-```
-
-```bash
-# Clone and enter the repo
-git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
-cd openclaw-ollama-cloud-configs
-
-# Check current status
-./setup-ollama.sh status
-
-# Pull all cloud models (11 models via ollama pull)
-./setup-ollama.sh pull
-
-# Preview changes
-./merge-config.py --dry-run
-
-# Merge config into your openclaw.json
-./merge-config.py --backup
-
-# Build the development version if you're working on things
-pnpm install && pnpm build && \
-cd ui && pnpm install && pnpm build && \
-cd .. && openclaw gateway uninstall && openclaw gateway install && \
-systemctl --user daemon-reload && \
-systemctl --user enable --now openclaw-gateway.service && \
-openclaw status
-
-# Restart OpenClaw
-openclaw gateway restart
-```
+Done! You can now use `@kimi`, `@deepseek`, `@gemini-pro`, etc.
 
 ## Included Models
 
-| Model | Alias | Input | Context | Cost (in/out) |
-|-------|-------|-------|---------|---------------|
-| `kimi-k2.5:cloud` | `kimi` | text+image | 262K | $0.0005/$0.0028 |
-| `deepseek-v3.2:cloud` | `deepseek` | text | 128K | $0.00028/$0.00042 |
-| `deepseek-v3.1:671b-cloud` | `deepseek-r` | text | 128K | $0.0006/$0.0017 |
-| `minimax-m2:cloud` | `minimax` | text | 128K | $0.0003/$0.0012 |
-| `minimax-m2.1:cloud` | `minimax-xl` | text | 256K | $0.0003/$0.0012 |
-| `qwen3-coder-next:cloud` | `qwen-coder` | text | 128K | $0.0005/$0.0012 |
-| `devstral-2:123b-cloud` | `devstral` | text | 128K | $0.0008/$0.0025 |
-| `gemini-3-pro-preview:cloud` | `gemini-pro` | text+image | 1M | $0.00125/$0.005 |
-| `gemini-3-flash-preview:cloud` | `gemini-flash` | text+image | 1M | $0.00015/$0.0006 |
-| `ministral-3:14b-cloud` | `ministral` | text+image | 128K | $0.0001/$0.0003 |
-| `rnj-1:8b-cloud` | `rnj` | text | 128K | $0.0004/$0.0012 |
+| Alias | Model | Inputs | Context | Cost (in/out) |
+|-------|-------|--------|---------|---------------|
+| `kimi` | `kimi-k2.5:cloud` | text+image | 262K | $0.50/$2.80 per M |
+| `deepseek` | `deepseek-v3.2:cloud` | text | 128K | $0.28/$0.42 per M |
+| `deepseek-r` | `deepseek-v3.1:671b-cloud` | text | 128K | $0.60/$1.70 per M |
+| `minimax` | `minimax-m2:cloud` | text | 128K | $0.30/$1.20 per M |
+| `minimax-xl` | `minimax-m2.1:cloud` | text | 256K | $0.30/$1.20 per M |
+| `qwen-coder` | `qwen3-coder-next:cloud` | text | 128K | $0.50/$1.20 per M |
+| `devstral` | `devstral-2:123b-cloud` | text | 128K | $0.80/$2.50 per M |
+| `gemini-pro` | `gemini-3-pro-preview:cloud` | text+image | 1M | $1.25/$5.00 per M |
+| `gemini-flash` | `gemini-3-flash-preview:cloud` | text+image | 1M | $0.15/$0.60 per M |
+| `ministral` | `ministral-3:14b-cloud` | text+image | 128K | $0.10/$0.30 per M |
+| `rnj` | `rnj-1:8b-cloud` | text | 128K | $0.40/$1.20 per M |
+
+**Default:** `kimi` (best balance of capability, speed, and vision support)
+
+**Fallback chain:** kimi → deepseek-r → gemini-pro → deepseek → qwen-coder → minimax-xl → ...
 
 ## Usage
 
-### In Chat (Aliases)
+### In OpenClaw Chat
 ```
-@kimi explain this
-@deepseek write a function
-@gemini-pro analyze this image
-@qwen-coder review my code
+@kimi explain quantum computing
+@deepseek-r solve this step by step
+@gemini-pro analyze this screenshot
+@qwen-coder review my rust code
 ```
 
 ### Via CLI
 ```bash
-# Use specific model
-openclaw run --model ollama/deepseek-v3.2:cloud "prompt"
+# Use an alias
+openclaw agent --message "Write a poem" --model @kimi
 
-# Use alias
-openclaw run --model @deepseek "prompt"
+# Use full model path (same thing)
+openclaw agent --message "Write a poem" --model ollama/kimi-k2.5:cloud
 ```
 
-## Scripts
-
-### `merge-config.py`
-Merge the Ollama config into your OpenClaw configuration.
-
-```bash
-./merge-config.py --help              # Show options
-./merge-config.py --dry-run           # Preview changes
-./merge-config.py --backup            # Merge with backup
-./merge-config.py --only-models       # Just update model list
-./merge-config.py --only-agents       # Just update aliases/defaults
+### In your openclaw.json
+```json5
+{
+  agent: {
+    model: "@kimi"  // or "ollama/kimi-k2.5:cloud"
+  }
+}
 ```
 
-### `setup-ollama.sh`
-Check Ollama installation, pull models, and verify cloud connectivity.
+## Setup Commands
+
+### `setup-ollama.sh` — Pull and verify models
 
 ```bash
-./setup-ollama.sh status      # Full status (default)
-./setup-ollama.sh check       # Quick check
-./setup-ollama.sh pull        # Pull all 11 cloud models
-./setup-ollama.sh aliases     # List aliases
-./setup-ollama.sh test        # Test connectivity
-./setup-ollama.sh test kimi   # Test specific model
+./setup-ollama.sh status       # Check what's installed
+./setup-ollama.sh pull         # Pull all 11 cloud models
+./setup-ollama.sh test         # Test all models
+./setup-ollama.sh test kimi    # Test specific model
+./setup-ollama.sh aliases      # Show all aliases
+```
+
+### `merge-config.py` — Merge into OpenClaw
+
+```bash
+./merge-config.py --dry-run     # Preview changes (no modify)
+./merge-config.py --backup      # Merge with timestamped backup
+./merge-config.py --only-models # Update just model definitions
+./merge-config.py --only-agents # Update just aliases/defaults
+```
+
+**What gets merged into `~/.openclaw/openclaw.json`:**
+
+| Section | Action |
+|---------|--------|
+| `models.providers.ollama.models` | Replace (11 models) |
+| `agents.defaults.model.primary` | Replace (→ `@kimi`) |
+| `agents.defaults.model.fallbacks` | Replace (fallback chain) |
+| `agents.defaults.models` | Replace (aliases) |
+
+Your auth, channels, gateway settings, and other configs are **left untouched**.
+
+## Prerequisites
+
+### 1. Ollama installed
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+### 2. Ollama running (with cloud relay)
+```bash
+# Ollama should be running locally on 11434
+ollama serve
+
+# Verify it's working
+curl http://127.0.0.1:11434/api/tags
+```
+
+> **Note:** This config uses Ollama Cloud models. Your local Ollama proxies requests to the cloud (no local GPU needed for these models).
+
+### 3. OpenClaw configured
+```bash
+# Ensure you have a base config
+openclaw configure --section workspace
 ```
 
 ## File Structure
 
 ```
 .
-├── openclaw-ollama-cloud.json   # Sanitized model config
-├── merge-config.py              # Merge script
-├── setup-ollama.sh              # Setup/verify script
-└── README.md                    # This file
+├── openclaw-ollama-cloud.json    # Model definitions + aliases
+├── merge-config.py               # Config merger script
+├── setup-ollama.sh               # Setup/verification script
+└── README.md                     # You're here!
 ```
-
-## What's in the Config?
-
-The `openclaw-ollama-cloud.json` contains only the model-related sections:
-
-- **models.providers.ollama** — Provider config with 11 cloud models
-- **agents.defaults.model.primary** — Default model (`kimi`)
-- **agents.defaults.model.fallbacks** — Fallback chain (10 models)
-- **agents.defaults.models** — Aliases for shorthand access
-
-## Merging Behavior
-
-The merge script updates these paths in your `~/.openclaw/openclaw.json`:
-
-| Path | Behavior |
-|------|----------|
-| `models.providers.ollama` | Full replace (all models) |
-| `agents.defaults.model.primary` | Replace |
-| `agents.defaults.model.fallbacks` | Replace |
-| `agents.defaults.models` | Replace (aliases) |
-
-Your existing auth, channels, gateway, and other settings are untouched.
-
-## Prerequisites
-
-1. **Ollama installed**
-   ```bash
-   curl -fsSL https://ollama.com/install.sh | sh
-   ```
-
-2. **Ollama running**
-   ```bash
-   ollama serve
-   ```
-
-3. **Pull cloud models**
-   ```bash
-   ./setup-ollama.sh pull
-   # Or individually:
-   ollama pull kimi-k2.5:cloud
-   ollama pull deepseek-v3.2:cloud
-   ollama pull deepseek-v3.1:671b-cloud
-   ollama pull minimax-m2:cloud
-   ollama pull minimax-m2.1:cloud
-   ollama pull qwen3-coder-next:cloud
-   ollama pull devstral-2:123b-cloud
-   ollama pull gemini-3-pro-preview:cloud
-   ollama pull gemini-3-flash-preview:cloud
-   ollama pull ministral-3:14b-cloud
-   ollama pull rnj-1:8b-cloud
-   ```
-
-4. **Cloud access configured**
-   - Ollama Cloud relay should be active (local 127.0.0.1:11434 proxies to cloud)
 
 ## Troubleshooting
 
-### Ollama not found
+### "ollama: command not found"
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-### Can't connect to Ollama
+### "Can't connect to Ollama"
 ```bash
-# Check if running
-curl http://127.0.0.1:11434/api/tags
-
 # Start Ollama
-ollama serve
+ollama serve &
+
+# Verify
+curl http://127.0.0.1:11434/api/tags
 ```
 
 ### Model not responding
 ```bash
-# Test connectivity
+# Test specific model
 ./setup-ollama.sh test kimi
+
+# Should show: ✅ kimi-k2.5:cloud - Working
+```
+
+### Config not merging
+```bash
+# Check it found your openclaw.json
+ls ~/.openclaw/openclaw.json
+
+# Dry run to see what it would change
+./merge-config.py --dry-run
+```
+
+## Updating
+
+```bash
+git pull                          # Get latest model list
+./setup-ollama.sh pull            # Pull any new models
+./merge-config.py --backup        # Re-merge config
+openclaw gateway restart          # Apply changes
 ```
 
 ## License
 
-MIT — use, modify, commit to your own repos.
+MIT — use, modify, commit to your own repos. No attribution required.
