@@ -110,11 +110,8 @@
           "ollama/minimax-m2:cloud",
           "ollama/minimax-m2.1:cloud",
           "ollama/qwen3-coder-next:cloud",
-          "ollama/devstral-2:123b-cloud",
           "ollama/gemini-3-pro-preview:cloud",
-          "ollama/gemini-3-flash-preview:cloud",
-          "ollama/ministral-3:14b-cloud",
-          "ollama/rnj-1:8b-cloud"
+          "ollama/gemini-3-flash-preview:cloud"
         ]
       },
       "models": {
