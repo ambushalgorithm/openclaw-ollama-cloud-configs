@@ -2,8 +2,6 @@
 
 Pre-configured cloud-hosted Ollama models for OpenClaw — 11 models with aliases, fallback chains, and automatic setup.
 
-<img width="755" height="598" alt="OpenClaw Config" src="https://github.com/user-attachments/assets/8603aa5d-70e8-4277-a382-05dfdf8c115a" />
-
 ## What You Get
 
 ```
