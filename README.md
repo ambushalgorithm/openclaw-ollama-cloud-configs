@@ -30,7 +30,7 @@ Pre-configured cloud-hosted Ollama models for OpenClaw — 11 models with aliase
 
 ```bash
 # Clone this repo
-git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
+git clone https://github.com/ambushalgorithm/openclaw-ollama-cloud-configs.git
 cd openclaw-ollama-cloud-configs
 
 # Check status and pull models
@@ -61,7 +61,7 @@ cd openclaw && pnpm install && pnpm build
 openclaw configure --section workspace
 
 # 3. Clone this repo (in another terminal)
-cd ~ && git clone git@github.com:crayon-doing-petri/openclaw-ollama-cloud-configs.git
+cd ~ && git clone https://github.com/ambushalgorithm/openclaw-ollama-cloud-configs.git
 
 # 4. Pull models and merge config
 cd openclaw-ollama-cloud-configs
