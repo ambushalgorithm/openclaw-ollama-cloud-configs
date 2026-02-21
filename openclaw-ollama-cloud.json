@@ -153,6 +153,23 @@
             "maxTokens": 65536
           },
           {
+            "id": "gemini-3-pro-preview:cloud",
+            "name": "gemini-3-pro-preview:cloud",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0.001,
+              "output": 0.005,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 1000000,
+            "maxTokens": 65536
+          },
+          {
             "id": "ministral-3:14b-cloud",
             "name": "ministral-3:14b-cloud",
             "reasoning": false,

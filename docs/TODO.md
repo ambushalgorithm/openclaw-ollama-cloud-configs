@@ -39,10 +39,11 @@
   - [x] Test gateway restart picks up config
   - [x] Test container cleanup
 
-- [ ] **Schema validation for JSON config**
-  - [ ] Validate openclaw-ollama-cloud.json schema
-  - [ ] Add CI check for schema validation
-  - [ ] Test invalid schema (should fail)
+- [x] **Schema validation for JSON config**
+  - [x] Validate openclaw-ollama-cloud.json schema
+  - [x] Add CI check for schema validation
+  - [x] Test invalid schema (should fail)
+  - [x] Fix: added missing gemini-3-pro-preview:cloud model
 
 ## Other
 
