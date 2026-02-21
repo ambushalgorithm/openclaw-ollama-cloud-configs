@@ -153,23 +153,6 @@
             "maxTokens": 65536
           },
           {
-            "id": "gemini-3-pro-preview:cloud",
-            "name": "gemini-3-pro-preview:cloud",
-            "reasoning": false,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0.001,
-              "output": 0.005,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 1000000,
-            "maxTokens": 65536
-          },
-          {
             "id": "ministral-3:14b-cloud",
             "name": "ministral-3:14b-cloud",
             "reasoning": false,
@@ -217,7 +200,6 @@
           "ollama/minimax-m2:cloud",
           "ollama/minimax-m2.1:cloud",
           "ollama/qwen3-coder-next:cloud",
-          "ollama/gemini-3-pro-preview:cloud",
           "ollama/gemini-3-flash-preview:cloud"
         ]
       },
@@ -230,7 +212,6 @@
         "ollama/minimax-m2.1:cloud": { "alias": "minimax-xl" },
         "ollama/qwen3-coder-next:cloud": { "alias": "qwen-coder" },
         "ollama/devstral-2:123b-cloud": { "alias": "devstral" },
-        "ollama/gemini-3-pro-preview:cloud": { "alias": "gemini-pro" },
         "ollama/gemini-3-flash-preview:cloud": { "alias": "gemini-flash" },
         "ollama/ministral-3:14b-cloud": { "alias": "ministral" },
         "ollama/rnj-1:8b-cloud": { "alias": "rnj" }
