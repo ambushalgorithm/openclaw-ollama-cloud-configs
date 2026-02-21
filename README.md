@@ -6,19 +6,19 @@ Pre-configured cloud-hosted Ollama models for OpenClaw — 11 models with aliase
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  kimi        → Kimi K2.5 (vision, 262K context)         │
-│  deepseek    → DeepSeek V3.2 (fast general)             │
-│  deepseek-r  → DeepSeek R1 671B (reasoning)             │
-│  qwen-coder  → Qwen 3 Coder (code specialist)           │
-│  gemini-pro  → Gemini 3 Pro (vision, 1M context)        │
-│  gemini-flash→ Gemini 3 Flash (fast vision)             │
-│  + 5 more...                                            │
+│  minimax-2.5 → Minimax M2.5 (default, best overall)    │
+│  kimi       → Kimi K2.5 (vision, 262K context)        │
+│  deepseek   → DeepSeek V3.2 (fast general)            │
+│  deepseek-r → DeepSeek R1 671B (reasoning)            │
+│  qwen-coder → Qwen 3 Coder (code specialist)          │
+│  gemini-flash→ Gemini 3 Flash (fast vision, 1M ctx)    │
+│  + 5 more...                                           │
 └─────────────────────────────────────────────────────────┘
 ```
 
 **Features:**
 - ✅ 11 cloud-hosted models via Ollama
-- ✅ Short aliases (`@kimi`, `@deepseek`, `@qwen-coder`)
+- ✅ Short aliases (`@minimax-2.5`, `@kimi`, `@deepseek`, etc.)
 - ✅ Automatic fallback chain (if one fails, try the next)
 - ✅ One-command setup
 
@@ -41,10 +41,10 @@ cd openclaw-ollama-cloud-configs
 openclaw gateway restart
 
 # Test it
-openclaw agent --model @kimi "Hello!"
+openclaw agent --model @minimax-2.5 "Hello!"
 ```
 
-Done! You can now use `@kimi`, `@deepseek`, `@gemini-pro`, etc.
+Done! You can now use `@minimax-2.5`, `@kimi`, `@deepseek`, etc.
 
 ## Fresh Start (Full Setup)
 
@@ -74,6 +74,7 @@ openclaw onboard
 
 | Alias | Model | Inputs | Context | Cost (input/output) |
 |-------|-------|--------|---------|---------------------|
+| `minimax-2.5` | `minimax-m2.5:cloud` | text | 131K | $0.0003 / $0.0012 |
 | `kimi` | `kimi-k2.5:cloud` | text+image | 262K | $0.0005 / $0.0028 |
 | `deepseek` | `deepseek-v3.2:cloud` | text | 128K | $0.00028 / $0.00042 |
 | `deepseek-r` | `deepseek-v3.1:671b-cloud` | text | 128K | $0.0006 / $0.0017 |
@@ -81,39 +82,38 @@ openclaw onboard
 | `minimax-xl` | `minimax-m2.1:cloud` | text | 256K | $0.0003 / $0.0012 |
 | `qwen-coder` | `qwen3-coder-next:cloud` | text | 128K | $0.0005 / $0.0012 |
 | `devstral` | `devstral-2:123b-cloud` | text | 128K | $0.0008 / $0.0025 |
-| `gemini-pro` | `gemini-3-pro-preview:cloud` | text+image | 1M | $0.00125 / $0.005 |
 | `gemini-flash` | `gemini-3-flash-preview:cloud` | text+image | 1M | $0.00015 / $0.0006 |
 | `ministral` | `ministral-3:14b-cloud` | text+image | 128K | $0.0001 / $0.0003 |
 | `rnj` | `rnj-1:8b-cloud` | text | 128K | $0.0004 / $0.0012 |
 
-**Default:** `kimi` (best balance of capability, speed, and vision support)
+**Default:** `minimax-m2.5:cloud` (best balance of capability and speed)
 
-**Fallback chain:** kimi → deepseek-r → gemini-pro → deepseek → qwen-coder → minimax-xl → ...
+**Fallback chain:** minimax-2.5 → kimi → deepseek → deepseek-r → minimax → minimax-xl → qwen-coder → gemini-flash → ...
 
 ## Usage
 
 ### In OpenClaw Chat
 ```
-@kimi explain quantum computing
+@minimax-2.5 explain quantum computing
 @deepseek-r solve this step by step
-@gemini-pro analyze this screenshot
+@kimi analyze this screenshot
 @qwen-coder review my rust code
 ```
 
 ### Via CLI
 ```bash
 # Use an alias
-openclaw agent --message "Write a poem" --model @kimi
+openclaw agent --message "Write a poem" --model @minimax-2.5
 
 # Use full model path (same thing)
-openclaw agent --message "Write a poem" --model ollama/kimi-k2.5:cloud
+openclaw agent --message "Write a poem" --model ollama/minimax-m2.5:cloud
 ```
 
 ### In your openclaw.json
 ```json5
 {
   agent: {
-    model: "@kimi"  // or "ollama/kimi-k2.5:cloud"
+    model: "@minimax-2.5"  // or "ollama/minimax-m2.5:cloud"
   }
 }
 ```
@@ -124,17 +124,17 @@ openclaw agent --message "Write a poem" --model ollama/kimi-k2.5:cloud
 
 ```bash
 ./setup-ollama.sh status       # Check what's installed
-./setup-ollama.sh pull         # Pull all 11 cloud models
-./setup-ollama.sh test         # Test all models
-./setup-ollama.sh test kimi    # Test specific model
-./setup-ollama.sh aliases      # Show all aliases
+./setup-ollama.sh pull        # Pull all 11 cloud models
+./setup-ollama.sh test        # Test all models
+./setup-ollama.sh test kimi   # Test specific model
+./setup-ollama.sh aliases     # Show all aliases
 ```
 
 ### `merge-config.py` — Merge into OpenClaw
 
 ```bash
 ./merge-config.py --dry-run     # Preview changes (no modify)
-./merge-config.py --backup      # Merge with timestamped backup
+./merge-config.py --backup     # Merge with timestamped backup
 ./merge-config.py --only-models # Update just model definitions
 ./merge-config.py --only-agents # Update just aliases/defaults
 ```
@@ -144,7 +144,7 @@ openclaw agent --message "Write a poem" --model ollama/kimi-k2.5:cloud
 | Section | Action |
 |---------|--------|
 | `models.providers.ollama.models` | Replace (11 models) |
-| `agents.defaults.model.primary` | Replace (→ `@kimi`) |
+| `agents.defaults.model.primary` | Replace (→ `minimax-m2.5`) |
 | `agents.defaults.model.fallbacks` | Replace (fallback chain) |
 | `agents.defaults.models` | Replace (aliases) |
 
@@ -181,7 +181,30 @@ openclaw configure --section workspace
 ├── openclaw-ollama-cloud.json    # Model definitions + aliases
 ├── merge-config.py               # Config merger script
 ├── setup-ollama.sh               # Setup/verification script
-└── README.md                     # You're here!
+├── README.md                     # You're here!
+└── tests/                        # Test suite
+    ├── test_merge_config.py      # Unit tests
+    ├── test_e2e_merge.py         # Subprocess E2E tests
+    ├── test_e2e_docker.py        # Docker E2E tests
+    └── test_schema.py            # Schema validation tests
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+# All tests
+python3 -m pytest tests/ -v
+
+# Unit tests only
+python3 -m pytest tests/test_merge_config.py -v
+
+# Schema validation
+python3 -m pytest tests/test_schema.py -v
+
+# E2E tests (requires Docker)
+python3 -m pytest tests/test_e2e_docker.py -v
 ```
 
 ## Troubleshooting
@@ -222,7 +245,7 @@ ls ~/.openclaw/openclaw.json
 ```bash
 git pull                          # Get latest model list
 ./setup-ollama.sh pull            # Pull any new models
-./merge-config.py --backup        # Re-merge config
+./merge-config.py --backup       # Re-merge config
 openclaw gateway restart          # Apply changes
 ```
 
