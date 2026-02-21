@@ -71,22 +71,35 @@ class TestOpenClawE2E:
         assert "openclaw-dev-test" in result.stdout
 
     def test_copy_repo_to_container(self):
-        """Test that we can copy repo files to container."""
-        # Copy the repo to container
-        result = subprocess.run(
-            ["docker", "cp", str(REPO_DIR), "openclaw-dev-test:/home/node/openclaw-ollama-cloud-configs"],
-            capture_output=True,
-            text=True
+        """Test that we can clone the public repo inside the container."""
+        # Clone the public repo inside container
+        result = self.run_e2e_exec(
+            "git", "clone", "https://github.com/ambushalgorithm/openclaw-ollama-cloud-configs.git",
+            "/home/node/openclaw-ollama-cloud-configs"
         )
-        assert result.returncode == 0
+        # Git may fail if directory exists, that's ok
+        assert result.returncode == 0 or "already exists" in result.stderr.lower()
         
         # Verify files exist
-        result = self.run_e2e_exec("ls", "-la", "/home/node/openclaw-ollama-cloud-configs/")
+        result = self.run_e2e_exec("ls", "/home/node/openclaw-ollama-cloud-configs/")
         assert "merge-config.py" in result.stdout
+
+    def ensure_repo_cloned(self):
+        """Ensure repo is cloned in container."""
+        # Check if already cloned
+        check = self.run_e2e_exec("ls", "/home/node/openclaw-ollama-cloud-configs/merge-config.py")
+        if check.returncode != 0:
+            # Clone the repo
+            self.run_e2e_exec(
+                "git", "clone", "https://github.com/ambushalgorithm/openclaw-ollama-cloud-configs.git",
+                "/home/node/openclaw-ollama-cloud-configs"
+            )
 
     def test_merge_config_inside_container(self, tmp_path):
         """Test running merge-config.py inside container."""
-        # First, copy a target config to container
+        # Ensure repo is cloned
+        self.ensure_repo_cloned()
+        
         # Create a minimal test config
         test_config = {
             "models": {"providers": {"ollama": {"models": []}}},
@@ -104,12 +117,6 @@ class TestOpenClawE2E:
             text=True
         )
         
-        # Copy repo to container if not already there
-        subprocess.run(
-            ["docker", "cp", str(REPO_DIR), "openclaw-dev-test:/home/node/openclaw-ollama-cloud-configs"],
-            capture_output=True
-        )
-        
         # Run merge inside container (using the test config)
         result = self.run_e2e_exec(
             "python3",
@@ -122,13 +129,19 @@ class TestOpenClawE2E:
         # Should succeed (dry-run)
         assert result.returncode == 0 or "Previewing" in result.stdout
 
+    def ensure_repo_cloned(self):
+        """Ensure repo is cloned in container."""
+        check = self.run_e2e_exec("ls", "/home/node/openclaw-ollama-cloud-configs/merge-config.py")
+        if check.returncode != 0:
+            self.run_e2e_exec(
+                "git", "clone", "https://github.com/ambushalgorithm/openclaw-ollama-cloud-configs.git",
+                "/home/node/openclaw-ollama-cloud-configs"
+            )
+
     def test_setup_ollama_status_inside_container(self):
         """Test running setup-ollama.sh status inside container."""
-        # Ensure repo is in container
-        subprocess.run(
-            ["docker", "cp", str(REPO_DIR), "openclaw-dev-test:/home/node/openclaw-ollama-cloud-configs"],
-            capture_output=True
-        )
+        # Ensure repo is cloned
+        self.ensure_repo_cloned()
         
         result = self.run_e2e_exec(
             "bash",
@@ -141,11 +154,8 @@ class TestOpenClawE2E:
 
     def test_setup_ollama_aliases_inside_container(self):
         """Test running setup-ollama.sh aliases inside container."""
-        # Ensure repo is in container
-        subprocess.run(
-            ["docker", "cp", str(REPO_DIR), "openclaw-dev-test:/home/node/openclaw-ollama-cloud-configs"],
-            capture_output=True
-        )
+        # Ensure repo is cloned
+        self.ensure_repo_cloned()
         
         result = self.run_e2e_exec(
             "bash",
