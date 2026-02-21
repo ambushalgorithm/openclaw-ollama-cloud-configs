@@ -229,6 +229,34 @@ class TestMergeConfigSubprocess:
         assert result.returncode == 0
         assert "--dry-run" in result.stdout or "--backup" in result.stdout
 
+    def test_merge_empty_target_with_cloud_config(self, minimal_target_config):
+        """Test merging cloud config into an empty target config."""
+        # This is the real-world scenario: empty openclaw.json + cloud config
+        result = self.run_merge_script(
+            "--source", str(SOURCE_CONFIG),
+            "--target", str(minimal_target_config)
+        )
+        
+        assert result.returncode == 0
+        
+        # Verify the merged config has the cloud models
+        with open(minimal_target_config) as f:
+            merged = json.load(f)
+        
+        # Should have ollama models
+        assert "models" in merged
+        assert "providers" in merged["models"]
+        assert "ollama" in merged["models"]["providers"]
+        
+        # Should have the cloud models from repo config
+        models = merged["models"]["providers"]["ollama"]["models"]
+        assert len(models) > 0
+        
+        # Should have the default model set
+        assert "agents" in merged
+        assert "defaults" in merged["agents"]
+        assert "model" in merged["agents"]["defaults"]
+
 
 class TestSetupOllamaSubprocess:
     """E2E tests for setup-ollama.sh using subprocess."""
