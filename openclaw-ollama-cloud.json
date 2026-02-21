@@ -7,11 +7,35 @@
         "api": "openai-completions",
         "models": [
           {
+            "id": "minimax-m2.5:cloud",
+            "name": "minimax-m2.5:cloud",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0003,
+              "output": 0.0012,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 16384
+          },
+          {
             "id": "kimi-k2.5:cloud",
             "name": "kimi-k2.5:cloud",
             "reasoning": false,
-            "input": ["text", "image"],
-            "cost": { "input": 0.0005, "output": 0.0028, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0.0005,
+              "output": 0.0028,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 262144,
             "maxTokens": 8192
           },
@@ -19,8 +43,15 @@
             "id": "deepseek-v3.2:cloud",
             "name": "deepseek-v3.2:cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.00028, "output": 0.00042, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.00028,
+              "output": 0.00042,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 8192
           },
@@ -28,8 +59,15 @@
             "id": "deepseek-v3.1:671b-cloud",
             "name": "deepseek-v3.1:671b-cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0006, "output": 0.0017, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0006,
+              "output": 0.0017,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 8192
           },
@@ -37,8 +75,15 @@
             "id": "minimax-m2:cloud",
             "name": "minimax-m2:cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0003, "output": 0.0012, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0003,
+              "output": 0.0012,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 4096
           },
@@ -46,8 +91,15 @@
             "id": "minimax-m2.1:cloud",
             "name": "minimax-m2.1:cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0003, "output": 0.0012, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0003,
+              "output": 0.0012,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 256000,
             "maxTokens": 4096
           },
@@ -55,8 +107,15 @@
             "id": "qwen3-coder-next:cloud",
             "name": "qwen3-coder-next:cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0005, "output": 0.0012, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0005,
+              "output": 0.0012,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 4096
           },
@@ -64,8 +123,15 @@
             "id": "devstral-2:123b-cloud",
             "name": "devstral-2:123b-cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0008, "output": 0.0025, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0008,
+              "output": 0.0025,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 4096
           },
@@ -73,8 +139,16 @@
             "id": "gemini-3-flash-preview:cloud",
             "name": "gemini-3-flash-preview:cloud",
             "reasoning": false,
-            "input": ["text", "image"],
-            "cost": { "input": 0.00015, "output": 0.0006, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0.00015,
+              "output": 0.0006,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 1000000,
             "maxTokens": 65536
           },
@@ -82,8 +156,16 @@
             "id": "ministral-3:14b-cloud",
             "name": "ministral-3:14b-cloud",
             "reasoning": false,
-            "input": ["text", "image"],
-            "cost": { "input": 0.0001, "output": 0.0003, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0.0001,
+              "output": 0.0003,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 4096
           },
@@ -91,8 +173,15 @@
             "id": "rnj-1:8b-cloud",
             "name": "rnj-1:8b-cloud",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0004, "output": 0.0012, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0004,
+              "output": 0.0012,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 128000,
             "maxTokens": 4096
           }
@@ -103,8 +192,9 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "ollama/kimi-k2.5:cloud",
+        "primary": "ollama/minimax-m2.5:cloud",
         "fallbacks": [
+          "ollama/kimi-k2.5:cloud",
           "ollama/deepseek-v3.2:cloud",
           "ollama/deepseek-v3.1:671b-cloud",
           "ollama/minimax-m2:cloud",
@@ -115,6 +205,7 @@
         ]
       },
       "models": {
+        "ollama/minimax-m2.5:cloud": { "alias": "minimax-2.5" },
         "ollama/kimi-k2.5:cloud": { "alias": "kimi" },
         "ollama/deepseek-v3.2:cloud": { "alias": "deepseek" },
         "ollama/deepseek-v3.1:671b-cloud": { "alias": "deepseek-r" },
